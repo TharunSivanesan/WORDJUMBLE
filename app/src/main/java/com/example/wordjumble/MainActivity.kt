@@ -37,12 +37,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-
+            val sharedPref = getSharedPreferences("MY", MODE_PRIVATE)
+            val highScore = sharedPref.getInt("highScore", 0)
+            hs.setText(highScore)
         }
 
-        val sharedPref = getSharedPreferences("MY", MODE_PRIVATE)
-        val highScore = sharedPref.getInt("highScore", 0)
-        hs.setText(highScore)
+
 
     }
 
