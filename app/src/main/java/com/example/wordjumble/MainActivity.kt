@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         val clueEditText = findViewById<EditText>(R.id.edClue)
         val startButton = findViewById<ImageButton>(R.id.btnStart)
         val hs = findViewById<TextView>(R.id.highScore)
+        val sharedPref = getSharedPreferences("MY", MODE_PRIVATE)
+        val highScore= sharedPref.getInt("highScore", 0)
+        hs.text="$highScore"
         startButton.setOnClickListener {
             val enteredWord = wordEditText.text.toString().uppercase()
             val enteredClue = clueEditText.text.toString().uppercase()
@@ -29,17 +32,12 @@ class MainActivity : AppCompatActivity() {
                     "Please enter the word and clue",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else {
-
-
+            }
+            else {
                 intent.putExtra("WORD", enteredWord)
                 intent.putExtra("CLUE", enteredClue)
                 startActivity(intent)
             }
-
-            val sharedPref = getSharedPreferences("MY", MODE_PRIVATE)
-            val highScore = sharedPref.getInt("highScore", 0)
-            hs.setText(highScore)
         }
 
 

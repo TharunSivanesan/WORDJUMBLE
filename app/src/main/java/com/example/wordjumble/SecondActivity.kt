@@ -27,6 +27,7 @@ class SecondActivity : AppCompatActivity() {
         val sharedPref = getSharedPreferences("MY", MODE_PRIVATE)
         val editor = sharedPref.edit()
         var score = 0
+        var highscore = 0
         guess.text = ""
         var d = 0
         val wordLength: Int? = word?.length
@@ -83,6 +84,11 @@ class SecondActivity : AppCompatActivity() {
                 continue
             } else {
                 numList.add(g)
+            }
+            fun high(){
+                if (score>=highscore){
+                    highscore=score
+                }
             }
             fun invisiblebtn(){
                 btn11.visibility = INVISIBLE
@@ -395,12 +401,13 @@ class SecondActivity : AppCompatActivity() {
                             2 -> score = p2
                             1 -> score = p3
                         }
+                        high()
                         editor.apply {
-                            putInt("highScore", score)
+                            putInt("highScore", highscore)
                             apply()
                         }
 
-                        textClue.text = "SCORE:$score"
+                        textClue.text="SCORE:$score"
                         clueBox.text = "GAME OVER"
                         textClue.visibility = VISIBLE
                         clueBox.visibility = VISIBLE
